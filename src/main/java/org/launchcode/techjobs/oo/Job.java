@@ -99,20 +99,29 @@ public class Job {
     @Override
     public String toString() {
         String dna = "Data not available";
+        int count = 0;
         if(name == null || name.equals("")) {
             name = dna;
+            count++;
         }
         if (employer == null || Objects.equals(employer.getValue(), "")) {
             employer.setValue(dna);
+            count++;
         }
         if (location == null || Objects.equals(location.getValue(), "")) {
             location.setValue(dna);
+            count++;
         }
         if (positionType == null || Objects.equals(positionType.getValue(), "")) {
             positionType.setValue(dna);
+            count++;
         }
         if (coreCompetency == null || Objects.equals(coreCompetency.getValue(), "")) {
             coreCompetency.setValue(dna);
+            count++;
+        }
+        if (count>4) {
+            return "OOPS! This job does not seem to exist.";
         }
         return "\nID: "+id+"\n" +
                 "Name: "+name+"\n" +
