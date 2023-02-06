@@ -50,4 +50,16 @@ public class JobTest {
         assertEquals(true, testString.startsWith("\n"));
         assertEquals(true, testString.endsWith("\n"));
     }
+
+    @Test
+    public void testToStringContainsCorrectLabelsAndData() {
+        Job job2 = new Job("Web Developer", new Employer("LaunchCode"), new Location("St. Louis"), new PositionType("Front-end developer"), new CoreCompetency("JavaScript"));
+        String answer = "\nID: "+job2.getId()+"\n" +
+                "Name: "+ job2.getName()+"\n" +
+                "Employer: "+job2.getEmployer()+"\n" +
+                "Location: "+job2.getLocation()+"\n" +
+                "Position Type: "+job2.getPositionType()+"\n" +
+                "Core Competency: "+job2.getCoreCompetency()+"\n";
+        assertEquals("answer equals job2.toString", answer, job2.toString());
+    }
 }
