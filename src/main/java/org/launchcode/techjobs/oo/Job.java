@@ -18,7 +18,7 @@ public class Job {
     //  the 'id' field.
 
     public Job() {
-        id = nextId;
+        this.id = nextId;
         nextId++;
     }
     public Job(String name, Employer employer, Location location, PositionType positionType, CoreCompetency coreCompetency) {
@@ -37,9 +37,9 @@ public class Job {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Job)) return false;
         Job job = (Job) o;
-        return getId() == job.getId();
+        return id == job.getId();
     }
 
     @Override
@@ -53,10 +53,6 @@ public class Job {
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -97,5 +93,32 @@ public class Job {
 
     public void setCoreCompetency(CoreCompetency coreCompetency) {
         this.coreCompetency = coreCompetency;
+    }
+
+
+    @Override
+    public String toString() {
+        String dna = "Data not available";
+        if(name == null || name.equals("")) {
+            name = dna;
+        }
+        if (employer == null || Objects.equals(employer.getValue(), "")) {
+            employer.setValue(dna);
+        }
+        if (location == null || Objects.equals(location.getValue(), "")) {
+            location.setValue(dna);
+        }
+        if (positionType == null || Objects.equals(positionType.getValue(), "")) {
+            positionType.setValue(dna);
+        }
+        if (coreCompetency == null || Objects.equals(coreCompetency.getValue(), "")) {
+            coreCompetency.setValue(dna);
+        }
+        return "\nID: "+id+"\n" +
+                "Name: "+name+"\n" +
+                "Employer: "+employer+"\n" +
+                "Location: "+location+"\n" +
+                "Position Type: "+positionType+"\n" +
+                "Core Competency: "+coreCompetency+"\n";
     }
 }
