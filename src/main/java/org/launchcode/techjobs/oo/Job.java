@@ -39,7 +39,7 @@ public class Job {
         if (this == o) return true;
         if (!(o instanceof Job)) return false;
         Job job = (Job) o;
-        return id == job.getId();
+        return id == job.id;
     }
 
     @Override
@@ -100,7 +100,7 @@ public class Job {
     public String toString() {
         String dna = "Data not available";
         int count = 0;
-        if(name == null || name.equals("")) {
+        if(getName() == null || getName().equals("")) {
             name = dna;
             count++;
         }
@@ -123,11 +123,11 @@ public class Job {
         if (count>4) {
             return "OOPS! This job does not seem to exist.";
         }
-        return "\nID: "+id+"\n" +
-                "Name: "+name+"\n" +
-                "Employer: "+employer+"\n" +
-                "Location: "+location+"\n" +
-                "Position Type: "+positionType+"\n" +
-                "Core Competency: "+coreCompetency+"\n";
+        return "\nID: "+getId()+"\n" +
+                "Name: "+getName()+"\n" +
+                "Employer: "+getEmployer()+"\n" +
+                "Location: "+getLocation()+"\n" +
+                "Position Type: "+getPositionType()+"\n" +
+                "Core Competency: "+getCoreCompetency()+"\n";
     }
 }
