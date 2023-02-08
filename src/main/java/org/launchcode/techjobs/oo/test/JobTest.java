@@ -16,7 +16,7 @@ public class JobTest {
         Job job1 = new Job();
         Job job2 = new Job();
 
-        assertNotEquals(job1,job2);
+        assertNotEquals(job1.getId(),job2.getId());
     }
 
     @Test
@@ -39,16 +39,19 @@ public class JobTest {
         Job job1 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
         Job job2 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
 
-        assertNotEquals("job1 is not job2", job1, job2);
+        assertFalse("This is false", job1.equals(job2));
     }
 
     @Test
     public void testToStringStartsAndEndsWithNewLine() {
         Job job1 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
-
-        String testString = job1.toString();
-        assertEquals(true, testString.startsWith("\n"));
-        assertEquals(true, testString.endsWith("\n"));
+        //Object job1 = new Object();
+        char startsWith = job1.toString().charAt(0);
+        char endsWith = job1.toString().charAt(job1.toString().length()-1);
+        assertEquals(startsWith,'\n');
+        assertEquals(endsWith,'\n');
+        //assertEquals(true, testString.startsWith("\n"));
+        //assertEquals(true, testString.endsWith("\n"));
     }
 
     @Test
@@ -60,6 +63,22 @@ public class JobTest {
                 "Location: "+job2.getLocation()+"\n" +
                 "Position Type: "+job2.getPositionType()+"\n" +
                 "Core Competency: "+job2.getCoreCompetency()+"\n";
-        assertEquals("answer equals job2.toString", answer, job2.toString());
+
+        assertEquals(answer, job2.toString());
+    }
+
+    @Test
+    public void testToStringHandlesEmptyField() {
+        Job job3 = new Job("Ice cream tester", new Employer(""), new Location("Home"), new PositionType("UX"), new CoreCompetency("Tasting ability"));
+        String actual = job3.toString();
+        String expected = "\nID: "+job3.getId()+"\n" +
+                "Name: "+ job3.getName()+"\n" +
+                "Employer: Data not available\n" +
+                "Location: "+job3.getLocation()+"\n" +
+                "Position Type: "+job3.getPositionType()+"\n" +
+                "Core Competency: "+job3.getCoreCompetency()+"\n";
+
+        //"Data not available";
+        assertEquals(expected, actual) ;
     }
 }
